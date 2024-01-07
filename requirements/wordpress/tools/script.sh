@@ -3,8 +3,8 @@
 
 
 # create directory to use in nginx container later and also to setup the wordpress conf
-mkdir -p /var/www/
-mkdir -p /var/www/html
+mkdir /var/www/
+mkdir /var/www/html
 
 cd /var/www/html
 
@@ -26,16 +26,16 @@ if [ -f /wp-config.php ]; then
     mv /wp-config.php /var/www/html/wp-config.php
 fi
 
-sed -i -r "s/db1/lol1/1"   wp-config.php
-sed -i -r "s/user/ss/1"  wp-config.php
-sed -i -r "s/pwd/tt/1"    wp-config.php
+sed -i -r "s/db1/MyDB/1"   wp-config.php
+sed -i -r "s/user/ZoktrFall/1"  wp-config.php
+sed -i -r "s/pwd/Xxx123/1"    wp-config.php
 
-wp core install --url=aafrikya.42.fr/ --title=RiadElYacoute --admin_user=forstman1 --admin_password=1234 --admin_email=sami.hafid.hs@gmail.com --skip-email --allow-root
-
-
+wp core install --url=aafrikya.42.fr/ --title=RiadElYacoute --admin_user=Zoktr --admin_password=Xxx123 --admin_email=TestOper@gmail.com --skip-email --allow-root
 
 
-wp user create sami1 sahafid@1337.com --role=author --user_pass=123 --allow-root
+
+
+wp user create ZoktrFall zoktr@42.com --role=author --user_pass=Xxx456 --allow-root
 
 
 wp theme install astra --activate --allow-root
