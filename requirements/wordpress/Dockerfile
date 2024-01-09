@@ -17,8 +17,8 @@ RUN apt install -y \
 	php${PHP_VERSION}-mbstring \
 	php${PHP_VERSION}-redis
 
-COPY ./tools/script.sh /
 COPY ./conf/wp-config.php /
+COPY ./tools/script.sh /
 
 RUN chmod +x /script.sh
 CMD [ "/script.sh" ]
