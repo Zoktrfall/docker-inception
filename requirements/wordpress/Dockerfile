@@ -1,6 +1,6 @@
-FROM debian:buster
+FROM debian:bookworm-slim
 
-ENV PHP_VERSION 7.3
+ENV PHP_VERSION 8.2
 
 RUN apt update -y 
 RUN apt install php-fpm php-mysql -y
@@ -17,8 +17,13 @@ RUN apt install -y \
 	php${PHP_VERSION}-mbstring \
 	php${PHP_VERSION}-redis
 
-COPY ./conf/wp-config.php /
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar 
+RUN mv wp-cli.phar /usr/local/bin/wp
+
 COPY ./tools/script.sh /
+
+EXPOSE 9000
 
 RUN chmod +x /script.sh
 CMD [ "/script.sh" ]
