@@ -17,10 +17,13 @@ RUN apt install -y \
 	php${PHP_VERSION}-mbstring \
 	php${PHP_VERSION}-redis
 
+RUN rm -rf /var/lib/apt/lists/*
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar 
 RUN mv wp-cli.phar /usr/local/bin/wp
+RUN mkdir -p /run/php
 
+COPY ./conf/www.conf /etc/php/${PHP_VERSION}/fpm/pool.d/
 COPY ./tools/script.sh /
 
 EXPOSE 9000
