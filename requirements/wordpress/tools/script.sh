@@ -2,6 +2,7 @@
 
 mkdir -p /var/www/html
 cd /var/www/html
+sleep 10
 
 if [ ! -f ./wp-config.php  ]; then
     rm -rf *
