@@ -2,7 +2,7 @@ FROM debian:bookworm-slim
 
 ENV PHP_VERSION 8.2
 
-RUN apt update -y 
+RUN apt-get update -y && apt-get upgrade -y
 RUN apt install php-fpm php-mysql -y
 RUN apt install curl -y
 RUN apt install wget -y
