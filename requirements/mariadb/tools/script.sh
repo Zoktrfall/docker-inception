@@ -2,10 +2,9 @@
 
 service mysql start 
 
-echo "CREATE DATABASE IF NOT EXISTS mydb ;" > db1.sql
-echo "CREATE USER IF NOT EXISTS 'ZoktrFall'@'%' IDENTIFIED BY 'Xxx123' ;" >> db1.sql
-echo "GRANT ALL PRIVILEGES ON mydb.* TO 'ZoktrFall'@'%' ;" >> db1.sql
-# echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '12345' ;" >> db1.sql
+echo "CREATE DATABASE IF NOT EXISTS $DB_Name ;" > db1.sql
+echo "CREATE USER IF NOT EXISTS '$DB_User'@'%' IDENTIFIED BY '$DB_Pwd' ;" >> db1.sql
+echo "GRANT ALL PRIVILEGES ON $DB_Name.* TO '$DB_User'@'%' ;" >> db1.sql
 echo "FLUSH PRIVILEGES;" >> db1.sql
 
 mysql < db1.sql
