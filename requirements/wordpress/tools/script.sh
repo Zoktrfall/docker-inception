@@ -1,5 +1,6 @@
 #!/bin/bash
 
+THEME_NAME="twentytwentyfour"
 mkdir -p /var/www/html
 cd /var/www/html
 sleep 10
@@ -17,6 +18,9 @@ if [ ! -f ./wp-config.php  ]; then
     wp core install --url=$DOMAIN_NAME/ --title=$WP_TITLE --admin_user=$WP_ADMIN_USR --admin_password=$WP_ADMIN_PWD --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
     wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root
     wp theme update --all --allow-root
+    if ! wp theme is-installed $THEME_NAME --allow-root; then
+        wp theme install $THEME_NAME --activate --allow-root
+    fi
     # wp plugin install redis-cache --activate --allow-root
     wp plugin update --all --allow-root
 fi
