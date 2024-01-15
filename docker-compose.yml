@@ -60,6 +60,18 @@ services:
     env_file:
       - .env
     restart: always
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer/.
+    image: adminer:42
+    depends_on:
+      - mariadb
+      - wordpress
+    ports:
+      - "600:80"
+    networks:
+      - inception
+    restart: always
   # ftp:
   #   container_name: ftp
   #   build: ./requirements/bonus/ftp/.
@@ -74,17 +86,6 @@ services:
   #     - "21:21"
   #     - "20:20"
   #     - "40000-40005:40000-40005"
-  #   networks:
-  #     - inception
-  #   restart: always
-  # adminer:
-  #   container_name: adminer
-  #   build: ./requirements/bonus/adminer/.
-  #   image: adminer:42
-  #   depends_on:
-  #     - mariadb
-  #   ports:
-  #     - "600:80"
   #   networks:
   #     - inception
   #   restart: always
