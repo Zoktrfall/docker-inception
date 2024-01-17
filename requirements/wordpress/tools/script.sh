@@ -21,9 +21,12 @@ if [ ! -f ./wp-config.php  ]; then
     wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root
     wp theme update --all --allow-root
 
-    chmod -R a+w wp-config.php wp-content wp-content/plugins wp-content/themes wp-content/uploads
-	chown -R www-data:www-data wp-config.php wp-content wp-content/plugins wp-content/themes wp-content/uploads
-    
+    find /var/www/html/wp-content -type d -exec chmod 755 {} \;
+    find /var/www/html/wp-content -type f -exec chmod 644 {} \;
+    chown -R www-data:www-data /var/www/html/wp-content
+    chmod 600 /var/www/html/wp-config.php
+    chown www-data:www-data /var/www/html/wp-config.php
+
     wp plugin install redis-cache --activate --allow-root
 
     wp config set WP_REDIS_HOST $REDIS_HOSTNAME --allow-root
@@ -37,7 +40,6 @@ if [ ! -f ./wp-config.php  ]; then
 fi
 
 sleep 10
-# wp plugin activate redis-cache --allow-root
 wp core update --allow-root
 
 /usr/sbin/php-fpm8.2 -F
