@@ -5,4 +5,5 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $KEYOUT_ -out $CERTS
 cd /etc/nginx/sites-available 
 cat nginx.conf  > default
 
+sleep 5
 nginx -g "daemon off;"

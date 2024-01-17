@@ -9,4 +9,4 @@ COPY ./tools/script.sh /
 EXPOSE 3306
 
 RUN chmod +x /script.sh
-CMD ["/script.sh"]
+CMD [ "/script.sh" ]
