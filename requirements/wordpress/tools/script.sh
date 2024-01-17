@@ -3,6 +3,7 @@
 mkdir -p /var/www/html
 cd /var/www/html
 
+sleep 10
 chmod -R 755 /var/www/html
 chown -R www-data:www-data /var/www/html
 

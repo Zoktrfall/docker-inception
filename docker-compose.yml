@@ -15,6 +15,13 @@ volumes:
                         device: ~/Desktop/docker-inception/mariadb
                         o: bind
                         type: none
+        portainer_data:
+                name: portainer
+                driver: local
+                driver_opts:
+                        device: ~/Desktop/docker-inception/portainer
+                        o: bind
+                        type: none
 
 networks:
   inception:
@@ -92,12 +99,23 @@ services:
     container_name: redis
     build: ./requirements/bonus/redis/.
     image: redis:42
-    # volumes:
-    #  - wordpress:/var/www/html
+    volumes:
+     - wordpress:/var/www/html
     depends_on:
       - wordpress
     env_file:
       - .env
+    networks:
+      - inception
+    restart: always
+  portainer:
+    container_name: portainer
+    build: "./requirements/bonus/portainer"
+    ports:
+      - "9443:9443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data"
     networks:
       - inception
     restart: always
@@ -109,18 +127,4 @@ services:
   #     - "3000:3000"
   #   networks:
   #     - inception
-  #   restart: always
-  # cadvisor:
-  #   container_name: cadvisor
-  #   build: ./requirements/bonus/cadvisor/.
-  #   image: cadvisor:42
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - inception
-  #   volumes:
-  #     - /:/rootfs:ro
-  #     - /var/run:/var/run:ro 
-  #     - /sys:/sys:ro 
-  #     - /var/lib/docker/:/var/lib/docker:ro
   #   restart: always
